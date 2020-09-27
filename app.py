@@ -58,13 +58,11 @@ def upload():
         df_pred = pd.DataFrame({'uuid': df['uuid'], 'Default_Rate': array})
         print(df_pred)
         
-        tempdir = tempfile.mkdtemp()
-        response_filename = os.path.join(tempdir, 'banana.csv')
-        with open(response_filename, 'w') as response_file:
-            df_pred.to_csv(response_file, index = False)      
+        
+        df_pred.to_csv('trial.csv', index = False)            
         
             
-            return send_file(response_file, mimetype='text/csv', attachment_filename='Default-Pred.csv', as_attachment=True)
+        return send_file('trial.csv', mimetype='text/csv', attachment_filename='Default-Pred.csv', as_attachment=True)
     
     return render_template('home.html', prediction_text="Your Prediction download should start soon...")
 
